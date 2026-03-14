@@ -80,8 +80,15 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* Improve text sizing on mobile */
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
   }
+
+  /* Improve tap highlight UX on mobile */
+  a, button { -webkit-tap-highlight-color: transparent; }
 }
 
 /* ── Scroll Progress Bar ── */
@@ -296,4 +303,45 @@
   .pulse-red {
     animation: pulseRed 2s ease-in-out infinite;
   }
+}
+
+/* ── Mobile-specific overrides ── */
+@media (max-width: 767px) {
+  /* Reduce animation travel distance so elements don't risk viewport overflow */
+  .reveal {
+    transform: translateY(24px);
+  }
+  .reveal-left {
+    transform: translateX(-28px);
+  }
+  .reveal-right {
+    transform: translateX(28px);
+  }
+  .reveal-scale {
+    transform: scale(0.95);
+  }
+
+  /* Disable hover lift on touch — avoids stuck hover states */
+  .card-hover-red:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Disable floating bob animations on mobile (battery / perf) */
+  .float-animation,
+  .float-animation-slow {
+    animation: none;
+  }
+}
+
+/* Ensure absolutely nothing bleeds outside the viewport width */
+html, body, #root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* xs breakpoint helper (used in flex-col xs:flex-row) */
+@media (min-width: 400px) {
+  .xs\:flex-row { flex-direction: row; }
+  .xs\:w-auto   { width: auto; }
 }

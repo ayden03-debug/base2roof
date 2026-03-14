@@ -96,17 +96,17 @@ const Index = () => {
             : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16 sm:h-20">
 
             {/* Logo */}
-            <a href="#home" className="flex items-center space-x-3 group">
-              <div className="w-11 h-11 bg-red-gradient rounded-xl flex items-center justify-center shadow-red-soft group-hover:shadow-red-glow transition-all duration-300">
-                <span className="text-white font-black text-base tracking-tight">B2R</span>
+            <a href="#home" className="flex items-center space-x-2.5 group min-w-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 bg-red-gradient rounded-xl flex items-center justify-center shadow-red-soft group-hover:shadow-red-glow transition-all duration-300 flex-shrink-0">
+                <span className="text-white font-black text-sm sm:text-base tracking-tight">B2R</span>
               </div>
-              <div>
-                <span className="text-white font-bold text-lg leading-none tracking-tight">Base2Roof</span>
-                <p className="text-white/45 text-[10px] font-medium tracking-[0.15em] uppercase mt-0.5">Technical Services LLC</p>
+              <div className="min-w-0">
+                <span className="text-white font-bold text-base sm:text-lg leading-none tracking-tight">Base2Roof</span>
+                <p className="text-white/45 text-[9px] sm:text-[10px] font-medium tracking-[0.15em] uppercase mt-0.5 truncate">Technical Services LLC</p>
               </div>
             </a>
 
@@ -116,7 +116,7 @@ const Index = () => {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="relative px-4 py-2 text-sm font-medium text-white/65 hover:text-white transition-colors duration-300 group"
+                  className="relative px-4 py-2.5 text-sm font-medium text-white/65 hover:text-white transition-colors duration-300 group min-h-[44px] flex items-center"
                 >
                   {item}
                   <span className="absolute inset-x-4 bottom-1 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -125,28 +125,30 @@ const Index = () => {
             </nav>
 
             {/* CTA + hamburger */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <QuoteForm />
+              {/* 44×44 touch target */}
               <button
-                className="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5"
+                className="lg:hidden w-11 h-11 flex flex-col justify-center items-center gap-[5px]"
                 onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle menu"
               >
-                <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
                 <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
-                <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+                <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
               </button>
             </div>
           </div>
 
           {/* Mobile menu */}
           {mobileOpen && (
-            <div className="lg:hidden border-t border-white/10 py-4 space-y-1">
+            <div className="lg:hidden border-t border-white/10 py-3 space-y-0.5 bg-brand-dark/98">
               {navLinks.map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  className="flex items-center px-4 min-h-[48px] text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                 >
                   {item}
                 </a>
@@ -161,23 +163,23 @@ const Index = () => {
         <HeroSection />
 
         {/* ── Services ── */}
-        <section id="services" className="py-28 bg-white">
-          <div className="container mx-auto px-6">
+        <section id="services" className="py-16 md:py-28 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
 
-            <div className="max-w-2xl mb-20 reveal-left">
-              <div className="flex items-center gap-3 mb-5">
+            <div className="max-w-2xl mb-12 md:mb-20 reveal-left">
+              <div className="flex items-center gap-3 mb-4 sm:mb-5">
                 <div className="red-divider-anim" />
                 <span className="label-text text-red-600">What We Do</span>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 heading-tight mb-5">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 heading-tight mb-4 sm:mb-5">
                 Services That We Offer
               </h2>
-              <p className="text-lg text-gray-500 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-500 leading-relaxed">
                 Comprehensive technical and fit-out solutions delivered with precision across the UAE — by a team you can trust since 2013.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {servicesLoading ? (
                 Array.from({ length: 7 }).map((_, i) => (
                   <div key={i} className="p-8 border border-gray-100 rounded-2xl">
@@ -237,39 +239,41 @@ const Index = () => {
         <AboutSection />
 
         {/* ── Contact CTA ── */}
-        <section id="contact" className="relative py-28 bg-brand-dark overflow-hidden">
+        <section id="contact" className="relative py-16 md:py-28 bg-brand-dark overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(220,38,38,0.12),transparent_60%)]" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-900/10 rounded-full -translate-x-48 translate-y-48 blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-red-900/10 rounded-full -translate-x-32 sm:-translate-x-48 translate-y-32 sm:translate-y-48 blur-3xl pointer-events-none" />
 
-          <div className="relative container mx-auto px-6">
+          <div className="relative container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-3 mb-6 reveal">
+              <div className="flex items-center justify-center gap-3 mb-5 sm:mb-6 reveal">
                 <div className="red-divider-anim" />
                 <span className="label-text text-red-400">Get In Touch</span>
                 <div className="red-divider-anim" />
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white heading-tight mb-6 reveal stagger-2">
-                Ready to Transform <br />
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white heading-tight mb-5 sm:mb-6 reveal stagger-2">
+                Ready to Transform <br className="hidden sm:block" />
                 <span className="text-gradient-red">Your Space?</span>
               </h2>
-              <p className="text-lg text-white/55 mb-12 max-w-xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg text-white/55 mb-8 sm:mb-12 max-w-xl mx-auto leading-relaxed">
                 We're on call 24/7 to react promptly to your service needs. Don't hesitate to contact us.
               </p>
 
-              <div className="grid sm:grid-cols-3 gap-4 mb-12">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-12">
                 {[
                   { label: 'Email', value: 'info@base2roof.ae', href: 'mailto:info@base2roof.ae', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
                   { label: 'Phone', value: '+971 556951608', href: 'tel:+971556951608', icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' },
                   { label: 'Address', value: '308, Al Shali Building, Abu Hail, Dubai', href: '#', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
                 ].map((item) => (
-                  <a key={item.label} href={item.href} className="glass-dark rounded-2xl p-6 text-left hover:border-red-600/30 border border-transparent transition-colors duration-300">
-                    <div className="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center mb-4">
+                  <a key={item.label} href={item.href} className="glass-dark rounded-2xl p-5 sm:p-6 text-left hover:border-red-600/30 border border-transparent transition-colors duration-300 flex sm:block items-center gap-4 sm:gap-0 min-h-[64px] sm:min-h-0">
+                    <div className="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0 sm:mb-4">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d={item.icon} />
                       </svg>
                     </div>
-                    <p className="label-text text-white/35 mb-1">{item.label}</p>
-                    <p className="text-white font-medium text-sm">{item.value}</p>
+                    <div>
+                      <p className="label-text text-white/35 mb-0.5 sm:mb-1">{item.label}</p>
+                      <p className="text-white font-medium text-sm">{item.value}</p>
+                    </div>
                   </a>
                 ))}
               </div>
@@ -281,9 +285,9 @@ const Index = () => {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="bg-[#080808] border-t border-white/5 pt-16 pb-8">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-10 mb-14">
+      <footer className="bg-[#080808] border-t border-white/5 pt-12 sm:pt-16 pb-8">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-14">
 
             {/* Brand */}
             <div className="md:col-span-1">
@@ -308,7 +312,7 @@ const Index = () => {
                   { href: 'https://www.linkedin.com/in/base2roof-technical-services-llc', label: 'LinkedIn' },
                 ].map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                    className="w-9 h-9 bg-white/5 hover:bg-red-600/80 rounded-lg flex items-center justify-center transition-colors duration-300 text-white/50 hover:text-white text-xs font-bold"
+                    className="w-11 h-11 bg-white/5 hover:bg-red-600/80 rounded-lg flex items-center justify-center transition-colors duration-300 text-white/50 hover:text-white text-xs font-bold"
                     title={s.label}
                   >
                     {s.label.charAt(0)}
