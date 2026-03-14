@@ -101,9 +101,11 @@ const Index = () => {
 
             {/* Logo */}
             <a href="#home" className="flex items-center space-x-2.5 group min-w-0">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 bg-red-gradient rounded-xl flex items-center justify-center shadow-red-soft group-hover:shadow-red-glow transition-all duration-300 flex-shrink-0">
-                <span className="text-white font-black text-sm sm:text-base tracking-tight">B2R</span>
-              </div>
+              <img
+                src="/favicon-96x96.png"
+                alt="Base2Roof logo"
+                className="w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 group-hover:opacity-90 transition-opacity duration-300"
+              />
               <div className="min-w-0">
                 <span className="text-white font-bold text-base sm:text-lg leading-none tracking-tight">Base2Roof</span>
                 <p className="text-white/45 text-[9px] sm:text-[10px] font-medium tracking-[0.15em] uppercase mt-0.5 truncate">Technical Services LLC</p>
@@ -292,9 +294,7 @@ const Index = () => {
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-3 mb-5">
-                <div className="w-10 h-10 bg-red-gradient rounded-xl flex items-center justify-center">
-                  <span className="text-white font-black text-sm">B2R</span>
-                </div>
+                <img src="/favicon-96x96.png" alt="Base2Roof logo" className="w-10 h-10" />
                 <div>
                   <span className="text-white font-bold">Base2Roof</span>
                   <p className="text-white/35 text-[10px] font-medium tracking-widest uppercase">Technical Services LLC</p>
