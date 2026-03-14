@@ -59,7 +59,7 @@ const QuoteForm = ({ variant = 'default' }: QuoteFormProps) => {
         )}
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-lg border-0 shadow-2xl">
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-lg border-0 shadow-2xl mx-4 sm:mx-auto">
         {/* Red accent top bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-red-gradient rounded-t-lg" />
 
@@ -73,7 +73,7 @@ const QuoteForm = ({ variant = 'default' }: QuoteFormProps) => {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-2">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {fields.filter(f => f.half).map((f) => (
               <div key={f.id}>
                 <Label htmlFor={f.id} className="label-text text-gray-400 block mb-1.5">
@@ -111,12 +111,13 @@ const QuoteForm = ({ variant = 'default' }: QuoteFormProps) => {
                 <SelectValue placeholder="Select a service" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="painting">Painting & Sub-Contracting</SelectItem>
-                <SelectItem value="tiles">Ceramic Tiles, Marble & Interlock</SelectItem>
-                <SelectItem value="gypsum">Gypsum False Ceiling</SelectItem>
+                <SelectItem value="painting">Painting Works</SelectItem>
                 <SelectItem value="cleaning">Cleaning Services</SelectItem>
-                <SelectItem value="plumbing">Plumbing Services</SelectItem>
-                <SelectItem value="electrical">Electrical Services</SelectItem>
+                <SelectItem value="tiles">Tile Fixing Works</SelectItem>
+                <SelectItem value="waterproofing">Water Proofing</SelectItem>
+                <SelectItem value="plumbing">Plumbing & Electrical</SelectItem>
+                <SelectItem value="carpentry">Carpentry Works</SelectItem>
+                <SelectItem value="gypsum">Gypsum & Ceiling Work</SelectItem>
                 <SelectItem value="multiple">Multiple Services</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
@@ -154,7 +155,7 @@ const QuoteForm = ({ variant = 'default' }: QuoteFormProps) => {
           <Button
             type="submit"
             disabled={isPending}
-            className="w-full bg-red-600 hover:bg-red-700 text-white py-6 rounded-xl text-sm font-bold shadow-red-soft hover:shadow-red-glow transition-all duration-300"
+            className="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl text-sm font-bold shadow-red-soft hover:shadow-red-glow transition-all duration-300 min-h-[52px]"
           >
             {isPending ? 'Submitting...' : 'Submit Quote Request'}
           </Button>
