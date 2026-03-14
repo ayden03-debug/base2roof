@@ -102,7 +102,7 @@ const Index = () => {
             {/* Logo */}
             <a href="#home" className="flex items-center space-x-2.5 group min-w-0">
               <img
-                src="/favicon-96x96.png"
+                src="/favicon.svg"
                 alt="Base2Roof logo"
                 className="w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 group-hover:opacity-90 transition-opacity duration-300"
               />
@@ -294,7 +294,7 @@ const Index = () => {
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-3 mb-5">
-                <img src="/favicon-96x96.png" alt="Base2Roof logo" className="w-10 h-10" />
+                <img src="/favicon.svg" alt="Base2Roof logo" className="w-10 h-10" />
                 <div>
                   <span className="text-white font-bold">Base2Roof</span>
                   <p className="text-white/35 text-[10px] font-medium tracking-widest uppercase">Technical Services LLC</p>
