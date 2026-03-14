@@ -64,11 +64,23 @@ const config: Config = {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        // Brand colors
+        brand: {
+          red: '#dc2626',
+          'red-deep': '#b91c1c',
+          'red-light': '#fee2e2',
+          dark: '#0a0a0a',
+          surface: '#111111',
+          card: '#1a1a1a',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {
@@ -79,27 +91,42 @@ const config: Config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
-        'fade-in': {
-          from: { opacity: '0', transform: 'translateY(20px)' },
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(24px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
-        'scale-in': {
-          from: { opacity: '0', transform: 'scale(0.95)' },
-          to: { opacity: '1', transform: 'scale(1)' },
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        'line-grow': {
+          from: { width: '0' },
+          to: { width: '3rem' },
+        },
+        'counter': {
+          from: { opacity: '0', transform: 'translateY(8px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in': 'fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-        'scale-in': 'scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'fade-in': 'fade-in 0.5s ease forwards',
+        'line-grow': 'line-grow 0.6s ease forwards',
+        'counter': 'counter 0.5s ease forwards',
+      },
+      backgroundImage: {
+        'red-gradient': 'linear-gradient(135deg, #b91c1c 0%, #dc2626 50%, #ef4444 100%)',
+        'dark-gradient': 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)',
+        'hero-overlay': 'linear-gradient(to right, rgba(10,10,10,0.92) 45%, rgba(10,10,10,0.4) 100%)',
+        'card-shine': 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%)',
       },
       boxShadow: {
-        'architectural': '0 25px 50px -12px hsl(0 0% 0% / 0.25)',
-        'elegant': '0 10px 30px -10px hsl(0 0% 0% / 0.15)',
-      },
-      transitionTimingFunction: {
-        'smooth': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'red-glow': '0 0 40px -8px rgba(220, 38, 38, 0.4)',
+        'red-soft': '0 8px 32px -4px rgba(220, 38, 38, 0.2)',
+        'dark-xl': '0 24px 64px -12px rgba(0,0,0,0.6)',
+        'card-hover': '0 20px 60px -10px rgba(220, 38, 38, 0.2), 0 8px 24px -4px rgba(0,0,0,0.12)',
       },
     },
   },
