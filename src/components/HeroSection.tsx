@@ -3,99 +3,110 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
-  const scrollToQuote = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="home" className="relative bg-white overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-red-50 to-transparent opacity-30"></div>
-      
+    <section id="home" className="relative bg-background overflow-hidden min-h-screen flex items-center">
+      {/* Background dot pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, hsl(0 0% 0%) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }}
+      />
+      {/* Radial gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-transparent pointer-events-none" />
+
       {/* Hero Content */}
-      <div className="relative container mx-auto px-4 py-24">
+      <div className="relative container mx-auto px-6 py-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="max-w-2xl">
-            <div className="mb-8">
-              <div className="inline-flex items-center bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                <div className="w-2 h-2 bg-red-600 rounded-full mr-2"></div>
-                Dubai's Premier Fit-Out Specialists
-              </div>
-              
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                Transforming
-                <span className="text-red-600 block">Commercial Spaces</span>
-                Into Success Stories
-              </h1>
-              
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                From concept to completion, we deliver exceptional fit-out solutions for offices, retail spaces, and hospitality venues across Dubai and the UAE. Licensed, certified, and trusted by leading businesses.
-              </p>
+            {/* Badge */}
+            <div className="inline-flex items-center border border-border bg-muted text-muted-foreground px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase mb-8">
+              <span className="w-1.5 h-1.5 bg-foreground rounded-full mr-2 opacity-60" />
+              Dubai's Premier Fit-Out Specialists
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button 
-                onClick={scrollToQuote}
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+
+            <h1 className="text-5xl lg:text-7xl font-light text-foreground text-architectural leading-tight mb-8">
+              Transforming
+              <br />
+              <span className="font-normal">Commercial</span>
+              <br />
+              <em className="not-italic text-muted-foreground">Spaces</em>
+            </h1>
+
+            <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-lg">
+              From concept to completion, we deliver exceptional fit-out solutions for offices, retail spaces, and hospitality venues across Dubai and the UAE.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <Button
+                onClick={() => scrollToSection('contact')}
+                className="bg-foreground text-background hover:bg-foreground/90 px-8 py-6 text-sm font-medium tracking-wide rounded-xl transition-all duration-500"
               >
                 Get Free Consultation
               </Button>
-              <Button 
-                variant="outline" 
-                className="border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300"
+              <Button
+                variant="outline"
+                onClick={() => scrollToSection('projects')}
+                className="border-border text-foreground hover:bg-muted px-8 py-6 text-sm font-medium tracking-wide rounded-xl transition-all duration-500"
               >
                 View Our Work
               </Button>
             </div>
-            
+
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-red-600 mb-2">150+</div>
-                <div className="text-sm text-gray-600 font-medium uppercase tracking-wide">Projects Delivered</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-red-600 mb-2">8+</div>
-                <div className="text-sm text-gray-600 font-medium uppercase tracking-wide">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-red-600 mb-2">100%</div>
-                <div className="text-sm text-gray-600 font-medium uppercase tracking-wide">Client Satisfaction</div>
-              </div>
+            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
+              {[
+                { value: '150+', label: 'Projects Delivered' },
+                { value: '8+', label: 'Years Experience' },
+                { value: '100%', label: 'Client Satisfaction' },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-3xl font-light text-foreground text-architectural mb-1">{stat.value}</div>
+                  <div className="text-minimal text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
-          
+
           <div className="relative lg:pl-8">
             <div className="relative">
               {/* Main Image */}
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                <img 
+              <div className="relative overflow-hidden rounded-2xl shadow-architectural">
+                <img
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
                   alt="Modern office interior design by Base2Roof"
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-              
-              {/* Floating Cards */}
-              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-2xl border max-w-xs">
-                <div className="flex items-center space-x-4">
-                  <div className="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center">
-                    <div className="w-7 h-7 bg-red-600 rounded"></div>
+
+              {/* Floating Card - Bottom Left */}
+              <div className="absolute -bottom-6 -left-6 bg-card border border-border p-5 rounded-xl shadow-elegant max-w-[200px]">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-foreground rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 font-medium">Licensed Contractor</p>
-                    <p className="font-bold text-gray-900">Dubai Municipality</p>
-                    <p className="text-sm text-red-600 font-semibold">ISO 9001:2015 Certified</p>
+                    <p className="text-xs text-muted-foreground">Licensed Contractor</p>
+                    <p className="text-sm font-semibold text-foreground">Dubai Municipality</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">ISO 9001:2015</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="absolute -top-8 -right-8 bg-red-600 text-white p-6 rounded-xl shadow-2xl">
+
+              {/* Floating Card - Top Right */}
+              <div className="absolute -top-6 -right-6 bg-foreground text-background p-5 rounded-xl shadow-architectural">
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-1">24/7</div>
-                  <div className="text-sm font-medium opacity-90">Project Support</div>
+                  <div className="text-2xl font-light text-architectural mb-1">24/7</div>
+                  <div className="text-xs font-medium opacity-70 tracking-wide uppercase">Project Support</div>
                 </div>
               </div>
             </div>
