@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 
 const STATS = [
@@ -8,51 +8,81 @@ const STATS = [
   { value: 100, suffix: '%', label: 'Client Satisfaction' },
 ];
 
-const AnimatedNumber = ({ value, suffix }: { value: number; suffix: string }) => {
+const AnimatedNumber = ({ value, suffix, start }: { value: number; suffix: string; start: boolean }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let start = 0;
-    const duration = 1800;
+    if (!start) return;
+    let current = 0;
+    const duration = 2000;
     const step = Math.ceil(value / (duration / 16));
     const timer = setInterval(() => {
-      start += step;
-      if (start >= value) {
+      current += step;
+      if (current >= value) {
         setCount(value);
         clearInterval(timer);
       } else {
-        setCount(start);
+        setCount(current);
       }
     }, 16);
     return () => clearInterval(timer);
-  }, [value]);
+  }, [value, start]);
 
   return <>{count}{suffix}</>;
 };
 
 const HeroSection = () => {
-  const scrollTo = (id: string) => {
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [parallaxY, setParallaxY] = useState(0);
+
+  // Parallax on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setParallaxY(window.scrollY * 0.35);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Trigger number counter when stats come into view
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStatsVisible(true); observer.disconnect(); } },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-brand-dark overflow-hidden">
 
-      {/* Background image */}
-      <div className="absolute inset-0">
+      {/* Parallax background */}
+      <div
+        className="absolute inset-0"
+        style={{ transform: `translateY(${parallaxY}px)`, willChange: 'transform' }}
+      >
         <img
           src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2400&auto=format&fit=crop"
-          alt="Base2Roof Technical Services — Premium construction and fit-out work in Dubai"
-          className="w-full h-full object-cover opacity-25"
+          alt="Base2Roof Technical Services Dubai"
+          className="w-full h-full object-cover opacity-25 scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/85 to-[#080808]/50" />
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-red-900/15 rounded-full blur-[120px]" />
       </div>
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/85 to-[#080808]/40" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-red-900/15 rounded-full blur-[100px] animate-pulse" />
+      <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-red-800/10 rounded-full blur-[80px]" />
 
       {/* Grid lines */}
-      <div className="absolute inset-0 opacity-[0.03]"
+      <div className="absolute inset-0 opacity-[0.025]"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
           backgroundSize: '80px 80px',
         }}
       />
@@ -61,39 +91,55 @@ const HeroSection = () => {
       <div className="relative w-full container mx-auto px-6 py-36">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left — Text */}
+          {/* Left */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-red-600/15 border border-red-600/25 text-red-400 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-8">
-              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
+            <div
+              className="inline-flex items-center gap-2.5 bg-red-600/15 border border-red-600/25 text-red-400 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-8"
+              style={{ animation: 'fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both' }}
+            >
+              <span className="w-1.5 h-1.5 bg-red-500 rounded-full pulse-red" />
               Dubai's Trusted Technical Services Since 2013
             </div>
 
-            {/* Headline — from base2roof.ae */}
-            <h1 className="text-5xl lg:text-7xl font-black text-white heading-tight mb-4 leading-none">
+            {/* Headline */}
+            <h1
+              className="text-5xl lg:text-7xl font-black text-white heading-tight mb-4 leading-none"
+              style={{ animation: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.35s both' }}
+            >
               Base 2 Roof
             </h1>
-            <h2 className="text-3xl lg:text-4xl font-light text-white/80 heading-tight mb-6 leading-snug">
+            <h2
+              className="text-3xl lg:text-4xl font-light text-white/80 heading-tight mb-6 leading-snug"
+              style={{ animation: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s both' }}
+            >
               A Perfect Way to <br />
               <span className="text-gradient-red font-bold">Build Your Dreams</span>
             </h2>
 
-            <p className="text-lg text-white/55 leading-relaxed mb-4 max-w-lg">
+            <p
+              className="text-lg text-white/55 leading-relaxed mb-4 max-w-lg"
+              style={{ animation: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.65s both' }}
+            >
               We're on call 24/7 to react promptly to your service needs. Don't hesitate to call.
             </p>
 
             <a
               href="tel:+971556951608"
-              className="inline-flex items-center gap-2 text-red-400 font-semibold text-sm mb-10 hover:text-red-300 transition-colors"
+              className="inline-flex items-center gap-2 text-red-400 font-semibold text-sm mb-10 hover:text-red-300 transition-colors group"
+              style={{ animation: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.75s both' }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-12 transition-transform">
                 <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               Call for Emergency: +971 556951608
             </a>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 mb-14">
+            <div
+              className="flex flex-wrap gap-4 mb-14"
+              style={{ animation: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.85s both' }}
+            >
               <Button
                 onClick={() => scrollTo('contact')}
                 className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-sm font-semibold rounded-xl shadow-red-soft hover:shadow-red-glow transition-all duration-400 group"
@@ -114,11 +160,15 @@ const HeroSection = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex gap-10 pt-8 border-t border-white/8">
+            <div
+              ref={statsRef}
+              className="flex gap-10 pt-8 border-t border-white/8"
+              style={{ animation: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 1s both' }}
+            >
               {STATS.map((stat) => (
                 <div key={stat.label}>
                   <div className="text-3xl font-black text-white heading-tight mb-1">
-                    <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                    <AnimatedNumber value={stat.value} suffix={stat.suffix} start={statsVisible} />
                   </div>
                   <div className="text-[11px] font-semibold text-white/40 tracking-widest uppercase">{stat.label}</div>
                 </div>
@@ -126,16 +176,19 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right — Feature cards */}
-          <div className="relative hidden lg:block">
+          {/* Right — feature cards */}
+          <div
+            className="relative hidden lg:block"
+            style={{ animation: 'fadeRight 1s cubic-bezier(0.22,1,0.36,1) 0.6s both' }}
+          >
             <div className="relative space-y-4 pl-8">
 
-              {/* Main image card */}
+              {/* Main image */}
               <div className="relative overflow-hidden rounded-2xl shadow-dark-xl border border-white/8">
                 <img
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop"
                   alt="Professional fit-out work by Base2Roof"
-                  className="w-full h-72 object-cover opacity-80"
+                  className="w-full h-72 object-cover opacity-80 hover:opacity-100 transition-opacity duration-500 hover:scale-105 transform transition-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
@@ -144,9 +197,9 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Floating stat cards */}
+              {/* Stat cards */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="glass-dark rounded-2xl p-5 border border-white/8">
+                <div className="glass-dark rounded-2xl p-5 border border-white/8 float-animation">
                   <div className="w-9 h-9 bg-red-600/20 rounded-lg flex items-center justify-center mb-3">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -156,7 +209,7 @@ const HeroSection = () => {
                   <p className="text-white text-xs font-semibold mb-0.5">Dubai Municipality</p>
                   <p className="text-white/40 text-[11px]">Licensed Contractor</p>
                 </div>
-                <div className="glass-dark rounded-2xl p-5 border border-white/8">
+                <div className="glass-dark rounded-2xl p-5 border border-white/8 float-animation-slow">
                   <div className="w-9 h-9 bg-red-600/20 rounded-lg flex items-center justify-center mb-3">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2">
                       <circle cx="12" cy="12" r="10" />
@@ -187,9 +240,11 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40"
+        style={{ animation: 'fadeIn 1s ease 1.5s both' }}
+      >
         <p className="text-white text-[10px] font-semibold tracking-[0.2em] uppercase">Scroll</p>
-        <div className="w-px h-10 bg-gradient-to-b from-white to-transparent" />
+        <div className="w-px h-10 bg-gradient-to-b from-white to-transparent" style={{ animation: 'float 2s ease-in-out infinite' }} />
       </div>
     </section>
   );

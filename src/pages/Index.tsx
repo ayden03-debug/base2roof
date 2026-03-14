@@ -64,10 +64,16 @@ const Index = () => {
   const { data: services, isLoading: servicesLoading } = useServices(true);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setScrolled(scrollTop > 40);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -75,6 +81,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
+
+      {/* ── Scroll Progress Bar ── */}
+      <div
+        id="scroll-progress"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
       {/* ── Navigation ── */}
       <header
@@ -152,9 +164,9 @@ const Index = () => {
         <section id="services" className="py-28 bg-white">
           <div className="container mx-auto px-6">
 
-            <div className="max-w-2xl mb-20">
+            <div className="max-w-2xl mb-20 reveal-left">
               <div className="flex items-center gap-3 mb-5">
-                <div className="red-divider" />
+                <div className="red-divider-anim" />
                 <span className="label-text text-red-600">What We Do</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 heading-tight mb-5">
@@ -192,8 +204,8 @@ const Index = () => {
                   </div>
                 ))
               ) : (
-                FALLBACK_SERVICES.map((service) => (
-                  <div key={service.id} className="group p-7 border border-gray-100 rounded-2xl hover:border-red-100 card-hover-red bg-white relative overflow-hidden">
+                FALLBACK_SERVICES.map((service, i) => (
+                  <div key={service.id} className={`reveal stagger-${(i % 8) + 1} group p-7 border border-gray-100 rounded-2xl hover:border-red-100 card-hover-red bg-white relative overflow-hidden`}>
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500 opacity-0 group-hover:opacity-100" />
                     <div className="relative">
                       <div className="w-13 h-13 w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
@@ -231,12 +243,12 @@ const Index = () => {
 
           <div className="relative container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <div className="red-divider" />
+              <div className="flex items-center justify-center gap-3 mb-6 reveal">
+                <div className="red-divider-anim" />
                 <span className="label-text text-red-400">Get In Touch</span>
-                <div className="red-divider" />
+                <div className="red-divider-anim" />
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white heading-tight mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white heading-tight mb-6 reveal stagger-2">
                 Ready to Transform <br />
                 <span className="text-gradient-red">Your Space?</span>
               </h2>

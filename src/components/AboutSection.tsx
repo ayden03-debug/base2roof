@@ -50,9 +50,9 @@ const AboutSection = () => {
           <div className="grid lg:grid-cols-2 gap-20 items-center">
 
             {/* Left */}
-            <div>
+            <div className="reveal-left">
               <div className="flex items-center gap-3 mb-6">
-                <div className="red-divider" />
+                <div className="red-divider-anim" />
                 <span className="label-text text-red-600">About Us</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 heading-tight mb-8">
@@ -111,7 +111,7 @@ const AboutSection = () => {
             </div>
 
             {/* Right — Image grid */}
-            <div className="relative">
+            <div className="relative reveal-right">
               <div className="grid grid-cols-2 gap-4">
                 <img
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=500&auto=format&fit=crop"
@@ -160,13 +160,12 @@ const AboutSection = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'First-Visit Resolution', desc: 'Our technicians ensure your problem is fixed from the very first visit — every time.', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+            {[{ title: 'First-Visit Resolution', desc: 'Our technicians ensure your problem is fixed from the very first visit — every time.', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
               { title: 'Multinational Experience', desc: 'Trusted by leading multinational companies and government bodies across the UAE since 2013.', icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064' },
               { title: '24/7 Availability', desc: "We're on call around the clock to react promptly to your service needs. Don't hesitate to call.", icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
               { title: 'UAE-Wide Coverage', desc: 'Actively involved in building construction and maintenance projects all across the UAE.', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
-            ].map((item) => (
-              <div key={item.title} className="bg-white border border-gray-100 rounded-2xl p-7 group hover:border-red-100 card-hover-red">
+            ].map((item, i) => (
+              <div key={item.title} className={`reveal stagger-${i + 1} bg-white border border-gray-100 rounded-2xl p-7 group hover:border-red-100 card-hover-red`}>
                 <div className="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <path d={item.icon} />
@@ -212,8 +211,8 @@ const AboutSection = () => {
                 </div>
               ))
             ) : (
-              displayTestimonials.map((t) => (
-                <div key={t.id} className="group border border-gray-100 rounded-2xl p-8 hover:border-red-100 card-hover-red bg-white relative overflow-hidden">
+              displayTestimonials.map((t, i) => (
+                <div key={t.id} className={`reveal stagger-${i + 1} group border border-gray-100 rounded-2xl p-8 hover:border-red-100 card-hover-red bg-white relative overflow-hidden`}>
                   <div className="absolute top-6 right-6 text-red-50 select-none pointer-events-none">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />

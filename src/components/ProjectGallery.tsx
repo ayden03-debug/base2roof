@@ -76,16 +76,16 @@ const ProjectGallery = () => {
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
-          <div>
+          <div className="reveal-left">
             <div className="flex items-center gap-3 mb-5">
-              <div className="red-divider" />
+              <div className="red-divider-anim" />
               <span className="label-text text-red-400">Our Work</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-white heading-tight">
               Highlighted Projects
             </h2>
           </div>
-          <p className="text-white/40 max-w-sm leading-relaxed text-sm md:text-right">
+          <p className="text-white/40 max-w-sm leading-relaxed text-sm md:text-right reveal-right">
             A showcase of real completed projects delivered by our team across Dubai and the UAE.
           </p>
         </div>
@@ -103,10 +103,10 @@ const ProjectGallery = () => {
               </div>
             ))
           ) : (
-            displayProjects.map((project) => (
+            displayProjects.map((project, i) => (
               <div
                 key={project.id}
-                className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-white/5 hover:border-red-600/30 transition-all duration-500"
+                className={`reveal stagger-${(i % 8) + 1} group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-white/5 hover:border-red-600/30 transition-all duration-500`}
               >
                 {/* Image */}
                 <div className="relative overflow-hidden h-72">
