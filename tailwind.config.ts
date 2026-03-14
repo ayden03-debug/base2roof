@@ -79,10 +79,27 @@ const config: Config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        'fade-in': {
+          from: { opacity: '0', transform: 'translateY(20px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        'scale-in': {
+          from: { opacity: '0', transform: 'scale(0.95)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+        'scale-in': 'scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      boxShadow: {
+        'architectural': '0 25px 50px -12px hsl(0 0% 0% / 0.25)',
+        'elegant': '0 10px 30px -10px hsl(0 0% 0% / 0.15)',
+      },
+      transitionTimingFunction: {
+        'smooth': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
     },
   },
