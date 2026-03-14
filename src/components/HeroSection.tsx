@@ -42,16 +42,14 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2400&auto=format&fit=crop"
-          alt="Premium construction and fit-out work in Dubai"
+          alt="Base2Roof Technical Services — Premium construction and fit-out work in Dubai"
           className="w-full h-full object-cover opacity-25"
         />
-        {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/85 to-[#080808]/50" />
-        {/* Red accent glow */}
         <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-red-900/15 rounded-full blur-[120px]" />
       </div>
 
-      {/* Decorative grid lines */}
+      {/* Grid lines */}
       <div className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: 'linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
@@ -68,20 +66,31 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2.5 bg-red-600/15 border border-red-600/25 text-red-400 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-8">
               <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-              Dubai's Trusted Technical Services
+              Dubai's Trusted Technical Services Since 2013
             </div>
 
-            {/* Headline */}
-            <h1 className="text-5xl lg:text-7xl font-black text-white heading-tight mb-6 leading-none">
-              Building <br />
-              <span className="text-gradient-red">Excellence</span>
-              <br />
-              From the Ground Up
+            {/* Headline — from base2roof.ae */}
+            <h1 className="text-5xl lg:text-7xl font-black text-white heading-tight mb-4 leading-none">
+              Base 2 Roof
             </h1>
+            <h2 className="text-3xl lg:text-4xl font-light text-white/80 heading-tight mb-6 leading-snug">
+              A Perfect Way to <br />
+              <span className="text-gradient-red font-bold">Build Your Dreams</span>
+            </h2>
 
-            <p className="text-lg text-white/55 leading-relaxed mb-10 max-w-lg">
-              Since 2013, Base2Roof Technical Services LLC has delivered precision fit-out, painting, tiling, gypsum, and MEP solutions for multinationals, property managers, and individuals across the UAE.
+            <p className="text-lg text-white/55 leading-relaxed mb-4 max-w-lg">
+              We're on call 24/7 to react promptly to your service needs. Don't hesitate to call.
             </p>
+
+            <a
+              href="tel:+971556951608"
+              className="inline-flex items-center gap-2 text-red-400 font-semibold text-sm mb-10 hover:text-red-300 transition-colors"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              Call for Emergency: +971 556951608
+            </a>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 mb-14">
@@ -97,10 +106,10 @@ const HeroSection = () => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => scrollTo('projects')}
+                onClick={() => scrollTo('services')}
                 className="border-white/15 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-sm font-semibold rounded-xl transition-all duration-400"
               >
-                View Our Work
+                Our Services
               </Button>
             </div>
 
@@ -130,8 +139,8 @@ const HeroSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <p className="text-white font-semibold text-sm">Premium Fit-Out Solutions</p>
-                  <p className="text-white/50 text-xs mt-0.5">Ceramic · Gypsum · Paint · MEP</p>
+                  <p className="text-white font-semibold text-sm">Premium Technical Services</p>
+                  <p className="text-white/50 text-xs mt-0.5">Painting · Tiling · Gypsum · MEP · Carpentry</p>
                 </div>
               </div>
 
@@ -154,21 +163,22 @@ const HeroSection = () => {
                       <polyline points="12 6 12 12 16 14" />
                     </svg>
                   </div>
-                  <p className="text-white text-xs font-semibold mb-0.5">24 / 7 Support</p>
+                  <p className="text-white text-xs font-semibold mb-0.5">24/7 Support</p>
                   <p className="text-white/40 text-[11px]">Always available</p>
                 </div>
               </div>
 
-              {/* ISO badge */}
+              {/* Address card */}
               <div className="glass-dark rounded-2xl px-5 py-4 border border-red-600/20 flex items-center gap-4">
                 <div className="w-10 h-10 bg-red-gradient rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">ISO 9001:2015 Certified</p>
-                  <p className="text-white/40 text-xs">Quality Management System</p>
+                  <p className="text-white text-sm font-semibold">308, Al Shali Building</p>
+                  <p className="text-white/40 text-xs">Abu Hail, Dubai, UAE</p>
                 </div>
               </div>
             </div>
@@ -176,7 +186,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Bottom scroll indicator */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
         <p className="text-white text-[10px] font-semibold tracking-[0.2em] uppercase">Scroll</p>
         <div className="w-px h-10 bg-gradient-to-b from-white to-transparent" />

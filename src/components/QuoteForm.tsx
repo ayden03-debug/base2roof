@@ -111,12 +111,13 @@ const QuoteForm = ({ variant = 'default' }: QuoteFormProps) => {
                 <SelectValue placeholder="Select a service" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="painting">Painting & Sub-Contracting</SelectItem>
-                <SelectItem value="tiles">Ceramic Tiles, Marble & Interlock</SelectItem>
-                <SelectItem value="gypsum">Gypsum False Ceiling</SelectItem>
+                <SelectItem value="painting">Painting Works</SelectItem>
                 <SelectItem value="cleaning">Cleaning Services</SelectItem>
-                <SelectItem value="plumbing">Plumbing Services</SelectItem>
-                <SelectItem value="electrical">Electrical Services</SelectItem>
+                <SelectItem value="tiles">Tile Fixing Works</SelectItem>
+                <SelectItem value="waterproofing">Water Proofing</SelectItem>
+                <SelectItem value="plumbing">Plumbing & Electrical</SelectItem>
+                <SelectItem value="carpentry">Carpentry Works</SelectItem>
+                <SelectItem value="gypsum">Gypsum & Ceiling Work</SelectItem>
                 <SelectItem value="multiple">Multiple Services</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>

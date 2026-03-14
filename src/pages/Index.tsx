@@ -7,92 +7,58 @@ import QuoteForm from '../components/QuoteForm';
 import { useServices } from '@/hooks/useServices';
 import { Skeleton } from '@/components/ui/skeleton';
 
-// Real services from base2roof.ae
+// Services sourced directly from base2roof.ae
 const FALLBACK_SERVICES = [
   {
     id: 'painting',
-    title: 'Painting & Sub-Contracting',
-    description: 'Professional painting services for commercial and residential properties. Our highly experienced team delivers flawless finishes across all surfaces, on time and to specification.',
-    icon: (
-      <path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z" />
-    ),
-    iconType: 'fill',
-  },
-  {
-    id: 'tiles',
-    title: 'Ceramic Tiles, Marble & Interlock',
-    description: 'Expert installation of ceramic tiles, marble, and interlock across all project scales. With hundreds of completed installations in Dubai, we bring precision and artistry to every surface.',
-    icon: (
-      <>
-        <rect x="3" y="3" width="8" height="8" rx="1" />
-        <rect x="13" y="3" width="8" height="8" rx="1" />
-        <rect x="3" y="13" width="8" height="8" rx="1" />
-        <rect x="13" y="13" width="8" height="8" rx="1" />
-      </>
-    ),
-    iconType: 'stroke',
-  },
-  {
-    id: 'gypsum',
-    title: 'Gypsum False Ceiling',
-    description: 'Bespoke gypsum false ceiling solutions designed to elevate interiors with elegance and functionality. Recognised industry-wide for superior quality and innovative design.',
-    icon: (
-      <>
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </>
-    ),
-    iconType: 'stroke',
+    title: 'Painting Works',
+    description: 'We are mainly focused on painting sub-contracting. We are equipped with a highly experienced and professional team to carry out all painting works.',
+    bullets: ['Residential Painting', 'Commercial Painting', 'Industrial Painting', 'Re-Painting Works', 'Renovation Work', 'Epoxy Flooring'],
+    iconPath: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
   },
   {
     id: 'cleaning',
     title: 'Cleaning Services',
-    description: 'Cost-effective, responsive, and high-quality cleaning services for commercial, retail, industrial, government, office, and medical environments. Committed to hygiene and excellence.',
-    icon: (
-      <>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </>
-    ),
-    iconType: 'stroke',
+    description: 'We offer our clients a cost-effective, responsive, and high-quality cleaning service across a diverse range of commercial, retail, industrial, government, office, and medical environments.',
+    bullets: ['Window Glass Cleaning', 'High-Rise Building Pressure Washing', 'Advertising Signboard Cleaning', 'Exterior & Interior Wall Cleaning', 'Floor Tile/Marble Deep Cleaning'],
+    iconPath: 'M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18',
+  },
+  {
+    id: 'tiles',
+    title: 'Tile Fixing Works',
+    description: 'Base2Roof Technical is one of the best ceramic tile, marble, and interlock installation companies in Dubai, UAE. We have completed hundreds of tile and interlock installations across the UAE.',
+    bullets: ['Wall & Floor Marble/Ceramic Tile Installation', 'Designed Marble/Tile Installation', 'Interlock Installation', 'Roof Tile Installation', 'Kitchen/Toilet Countertop Installation'],
+    iconPath: 'M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z',
+  },
+  {
+    id: 'waterproofing',
+    title: 'Water Proofing',
+    description: 'Base2Roof personnel are experienced in all kinds of waterproofing solutions, protecting your property from moisture damage with industry-leading materials and techniques.',
+    bullets: ['Concrete Roof Waterproofing', 'Self-Adhesive Waterproofing', 'Toilet/Balcony Floor Waterproofing', 'Warehouse & Metal Roof Waterproofing', 'Membrane Services'],
+    iconPath: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z',
   },
   {
     id: 'plumbing',
-    title: 'Plumbing Services',
-    description: 'Full-scope plumbing installation, commissioning, and maintenance. Our certified technicians resolve issues on the first visit, covering both new installations and repairs.',
-    icon: (
-      <>
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
-      </>
-    ),
-    iconType: 'stroke',
+    title: 'Plumbing & Electrical',
+    description: 'A good plumber or electrician can be hard to find. There is no shortage of available plumbing and electrical technicians at B2R. Our technicians will always ensure your problem is fixed from the first visit.',
+    bullets: ['All Types of Electrical/Plumbing Installation & Commissioning', 'Maintenance of All Electrical/Plumbing Installations', 'Upgrading of Any Electrical/Plumbing Set-Up', 'DM Maintenance'],
+    iconPath: 'M13 10V3L4 14h7v7l9-11h-7z',
   },
   {
-    id: 'electrical',
-    title: 'Electrical Services',
-    description: 'Comprehensive electrical installation, commissioning, and maintenance across commercial and residential projects. Safe, compliant, and delivered by qualified electricians.',
-    icon: (
-      <>
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </>
-    ),
-    iconType: 'stroke',
+    id: 'carpentry',
+    title: 'Carpentry Works',
+    description: 'We are highly experienced in carpentry works, delivering quality craftsmanship for both residential and commercial clients across Dubai and the UAE.',
+    bullets: ['Kitchen Cabinet Installation', 'Cupboard Installation', 'Pergola Installation', 'Wooden Door Installation & Polishing'],
+    iconPath: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
+  },
+  {
+    id: 'gypsum',
+    title: 'Gypsum & Ceiling Work',
+    description: 'We have earned recognition in the industry by delivering a superior quality variety of gypsum false ceilings. Our false ceiling solutions are specially designed to meet each client\'s needs.',
+    bullets: ['Gypsum False Ceiling', 'POP False Ceiling', 'Grid False Ceiling', 'Glass Wall Partition', 'Plaster Slab Wall Partition'],
+    iconPath: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
   },
 ];
-
-const ServiceIcon = ({ service }: { service: typeof FALLBACK_SERVICES[0] }) => (
-  <svg
-    width="26"
-    height="26"
-    viewBox="0 0 24 24"
-    fill={service.iconType === 'fill' ? 'currentColor' : 'none'}
-    stroke={service.iconType === 'stroke' ? 'currentColor' : 'none'}
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    {service.icon}
-  </svg>
-);
 
 const Index = () => {
   const { data: services, isLoading: servicesLoading } = useServices(true);
@@ -146,10 +112,9 @@ const Index = () => {
               ))}
             </nav>
 
-            {/* CTA */}
+            {/* CTA + hamburger */}
             <div className="flex items-center gap-3">
               <QuoteForm />
-              {/* Mobile hamburger */}
               <button
                 className="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5"
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -187,24 +152,22 @@ const Index = () => {
         <section id="services" className="py-28 bg-white">
           <div className="container mx-auto px-6">
 
-            {/* Header */}
             <div className="max-w-2xl mb-20">
               <div className="flex items-center gap-3 mb-5">
                 <div className="red-divider" />
                 <span className="label-text text-red-600">What We Do</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 heading-tight mb-5">
-                Our Core Services
+                Services That We Offer
               </h2>
               <p className="text-lg text-gray-500 leading-relaxed">
-                Comprehensive technical and fit-out solutions for commercial, industrial, and residential clients across the UAE — delivered with precision since 2013.
+                Comprehensive technical and fit-out solutions delivered with precision across the UAE — by a team you can trust since 2013.
               </p>
             </div>
 
-            {/* Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {servicesLoading ? (
-                Array.from({ length: 6 }).map((_, i) => (
+                Array.from({ length: 7 }).map((_, i) => (
                   <div key={i} className="p-8 border border-gray-100 rounded-2xl">
                     <Skeleton className="w-14 h-14 rounded-xl mb-6" />
                     <Skeleton className="h-6 w-3/4 mb-3" />
@@ -230,14 +193,26 @@ const Index = () => {
                 ))
               ) : (
                 FALLBACK_SERVICES.map((service) => (
-                  <div key={service.id} className="group p-8 border border-gray-100 rounded-2xl hover:border-red-100 card-hover-red bg-white relative overflow-hidden">
+                  <div key={service.id} className="group p-7 border border-gray-100 rounded-2xl hover:border-red-100 card-hover-red bg-white relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500 opacity-0 group-hover:opacity-100" />
                     <div className="relative">
-                      <div className="w-14 h-14 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
-                        <ServiceIcon service={service} />
+                      <div className="w-13 h-13 w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d={service.iconPath} />
+                        </svg>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 mb-3">{service.title}</h3>
-                      <p className="text-gray-500 text-sm leading-relaxed">{service.description}</p>
+                      <h3 className="text-base font-bold text-gray-900 mb-2">{service.title}</h3>
+                      <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.description}</p>
+                      <ul className="space-y-1.5">
+                        {service.bullets.map((b) => (
+                          <li key={b} className="flex items-start gap-2 text-xs text-gray-400">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" className="mt-0.5 flex-shrink-0">
+                              <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 ))
@@ -251,7 +226,6 @@ const Index = () => {
 
         {/* ── Contact CTA ── */}
         <section id="contact" className="relative py-28 bg-brand-dark overflow-hidden">
-          {/* Background accent */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(220,38,38,0.12),transparent_60%)]" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-900/10 rounded-full -translate-x-48 translate-y-48 blur-3xl" />
 
@@ -267,17 +241,16 @@ const Index = () => {
                 <span className="text-gradient-red">Your Space?</span>
               </h2>
               <p className="text-lg text-white/55 mb-12 max-w-xl mx-auto leading-relaxed">
-                From a single room to an entire building — our team is ready to bring your vision to life. Request a free consultation today.
+                We're on call 24/7 to react promptly to your service needs. Don't hesitate to contact us.
               </p>
 
-              {/* Contact info row */}
               <div className="grid sm:grid-cols-3 gap-4 mb-12">
                 {[
-                  { label: 'Email', value: 'info@base2roof.ae', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
-                  { label: 'Phone', value: '+971 4 XXX XXXX', icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' },
-                  { label: 'Location', value: 'Business Bay, Dubai, UAE', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
+                  { label: 'Email', value: 'info@base2roof.ae', href: 'mailto:info@base2roof.ae', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+                  { label: 'Phone', value: '+971 556951608', href: 'tel:+971556951608', icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' },
+                  { label: 'Address', value: '308, Al Shali Building, Abu Hail, Dubai', href: '#', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
                 ].map((item) => (
-                  <div key={item.label} className="glass-dark rounded-2xl p-6 text-left">
+                  <a key={item.label} href={item.href} className="glass-dark rounded-2xl p-6 text-left hover:border-red-600/30 border border-transparent transition-colors duration-300">
                     <div className="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center mb-4">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d={item.icon} />
@@ -285,7 +258,7 @@ const Index = () => {
                     </div>
                     <p className="label-text text-white/35 mb-1">{item.label}</p>
                     <p className="text-white font-medium text-sm">{item.value}</p>
-                  </div>
+                  </a>
                 ))}
               </div>
 
@@ -312,23 +285,31 @@ const Index = () => {
                 </div>
               </div>
               <p className="text-white/40 text-sm leading-relaxed mb-5">
-                Established in 2013. Serving multinational companies, property management firms, and individuals across the UAE with quality, not quantity.
+                Established in 2013. Serving multinational companies, property management firms, and individuals across the UAE. Our motto: "We believe in quality, not quantity."
               </p>
+              {/* Social links — from base2roof.ae */}
               <div className="flex gap-3">
-                {/* Social placeholders */}
-                {['linkedin', 'instagram', 'facebook'].map((s) => (
-                  <div key={s} className="w-9 h-9 bg-white/5 hover:bg-red-600/80 rounded-lg flex items-center justify-center cursor-pointer transition-colors duration-300">
-                    <div className="w-4 h-4 bg-white/40 rounded-sm" />
-                  </div>
+                {[
+                  { href: 'https://www.facebook.com/Base2Roof-Technical-Services-LLC-548237979018900', label: 'Facebook' },
+                  { href: 'https://www.instagram.com/base2roof2/', label: 'Instagram' },
+                  { href: 'https://twitter.com/Base2roofL', label: 'Twitter' },
+                  { href: 'https://www.linkedin.com/in/base2roof-technical-services-llc', label: 'LinkedIn' },
+                ].map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                    className="w-9 h-9 bg-white/5 hover:bg-red-600/80 rounded-lg flex items-center justify-center transition-colors duration-300 text-white/50 hover:text-white text-xs font-bold"
+                    title={s.label}
+                  >
+                    {s.label.charAt(0)}
+                  </a>
                 ))}
               </div>
             </div>
 
             {/* Services */}
             <div>
-              <h3 className="text-white text-sm font-semibold mb-5 tracking-wide">Services</h3>
+              <h3 className="text-white text-sm font-semibold mb-5 tracking-wide">Our Services</h3>
               <ul className="space-y-3 text-sm text-white/40">
-                {['Painting & Sub-Contracting', 'Ceramic Tiles & Marble', 'Gypsum False Ceiling', 'Cleaning Services', 'Plumbing Services', 'Electrical Services'].map((item) => (
+                {['Painting Works', 'Cleaning Services', 'Tile Fixing Works', 'Water Proofing Services', 'Plumbing & Electrical Work', 'Carpentry Works', 'Gypsum & Ceiling Work'].map((item) => (
                   <li key={item}>
                     <a href="#services" className="hover:text-white transition-colors duration-300 flex items-center gap-2 group">
                       <span className="w-1 h-1 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -343,9 +324,9 @@ const Index = () => {
             <div>
               <h3 className="text-white text-sm font-semibold mb-5 tracking-wide">Company</h3>
               <ul className="space-y-3 text-sm text-white/40">
-                {['About Us', 'Our Projects', 'Careers', 'News & Updates', 'Contact Us'].map((item) => (
+                {['About Us', 'Our Projects', 'Our Clients', 'Contact Us'].map((item) => (
                   <li key={item}>
-                    <a href="#about" className="hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                    <a href={`#${item.toLowerCase().replace(/\s/g, '')}`} className="hover:text-white transition-colors duration-300 flex items-center gap-2 group">
                       <span className="w-1 h-1 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {item}
                     </a>
@@ -354,39 +335,45 @@ const Index = () => {
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* Contact — real details from base2roof.ae */}
             <div>
               <h3 className="text-white text-sm font-semibold mb-5 tracking-wide">Get In Touch</h3>
               <div className="space-y-4 text-sm text-white/40">
                 <div className="flex items-start gap-3">
                   <div className="w-7 h-7 bg-red-600/15 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-3 h-3 bg-red-500 rounded-sm" />
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   </div>
                   <div>
                     <p className="text-white/70 font-medium mb-0.5">Dubai Office</p>
-                    <p>Business Bay, Dubai, UAE</p>
+                    <p>308, Al Shali Building,<br />Abu Hail, Dubai, UAE</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <a href="tel:+97143463931" className="flex items-center gap-3 hover:text-white transition-colors">
                   <div className="w-7 h-7 bg-red-600/15 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <div className="w-3 h-3 bg-red-500 rounded-sm" />
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  </div>
+                  <p>+971 43463931</p>
+                </a>
+                <a href="tel:+971556951608" className="flex items-center gap-3 hover:text-white transition-colors">
+                  <div className="w-7 h-7 bg-red-600/15 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  </div>
+                  <p>+971 556951608</p>
+                </a>
+                <a href="mailto:info@base2roof.ae" className="flex items-center gap-3 hover:text-white transition-colors">
+                  <div className="w-7 h-7 bg-red-600/15 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   </div>
                   <p>info@base2roof.ae</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 bg-red-600/15 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <div className="w-3 h-3 bg-red-500 rounded-sm" />
-                  </div>
-                  <p>+971 4 XXX XXXX</p>
-                </div>
+                </a>
               </div>
             </div>
           </div>
 
           {/* Bottom bar */}
           <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/25">
-            <p>&copy; {new Date().getFullYear()} Base2Roof Technical Services LLC. All rights reserved.</p>
-            <p>Licensed Contractor · Dubai Municipality Approved · ISO 9001:2015 Certified</p>
+            <p>Copyright &copy; Base 2 Roof {new Date().getFullYear()}. All rights reserved.</p>
+            <p>Licensed Contractor · Dubai Municipality Approved</p>
           </div>
         </div>
       </footer>

@@ -3,70 +3,70 @@ import React from 'react';
 import { useProjects } from '@/hooks/useProjects';
 import { Skeleton } from '@/components/ui/skeleton';
 
+// Real project names from base2roof.ae
 const FALLBACK_PROJECTS = [
   {
     id: '1',
-    title: 'Corporate Office Fit-Out',
-    project_type: 'Commercial',
-    description: 'Complete office transformation including gypsum ceilings, premium flooring, and full electrical installation for a multinational firm.',
+    title: 'Gypsum Ceiling',
+    project_type: 'Gypsum Work',
+    description: 'Superior quality gypsum false ceiling installation — specially designed and delivered with industry-recognised craftsmanship.',
     image_url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
-    location: 'Business Bay, Dubai',
+    location: 'Dubai, UAE',
     completion_date: '2024-01-01',
   },
   {
     id: '2',
-    title: 'Luxury Villa Renovation',
-    project_type: 'Residential',
-    description: 'Full-scope renovation featuring marble flooring, custom gypsum ceilings, bespoke paintwork, and complete plumbing upgrade.',
-    image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
-    location: 'Palm Jumeirah, Dubai',
-    completion_date: '2023-08-01',
+    title: 'Roofing Works',
+    project_type: 'Waterproofing',
+    description: 'Comprehensive concrete roof waterproofing and membrane services protecting the structure from moisture damage.',
+    image_url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop',
+    location: 'Dubai, UAE',
+    completion_date: '2023-09-01',
   },
   {
     id: '3',
-    title: 'Retail Store Interior',
-    project_type: 'Retail',
-    description: 'High-end retail environment with premium ceramic tile installation, feature gypsum ceiling design, and full electrical fit-out.',
-    image_url: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop',
-    location: 'Dubai Mall, Dubai',
+    title: 'Tile Fixing Works',
+    project_type: 'Tile Installation',
+    description: 'Wall and floor ceramic tile and marble installation completed to the highest standard — one of hundreds of tile projects delivered across Dubai and the UAE.',
+    image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+    location: 'Dubai, UAE',
     completion_date: '2023-11-01',
   },
   {
     id: '4',
-    title: 'Hotel Lobby Restoration',
-    project_type: 'Hospitality',
-    description: 'Prestigious hospitality project encompassing interlock flooring, decorative gypsum work, and professional deep-clean services.',
-    image_url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop',
-    location: 'DIFC, Dubai',
-    completion_date: '2023-06-01',
-  },
-  {
-    id: '5',
-    title: 'Industrial Facility Painting',
-    project_type: 'Industrial',
-    description: 'Large-scale painting sub-contract for a warehouse complex, covering 12,000 sqm of internal and external surfaces.',
-    image_url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop',
-    location: 'Jebel Ali, Dubai',
+    title: 'Painting Works',
+    project_type: 'Painting',
+    description: 'Professional commercial painting sub-contracting project carried out by our highly experienced and dedicated painting team.',
+    image_url: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=800&auto=format&fit=crop',
+    location: 'Dubai, UAE',
     completion_date: '2024-02-01',
   },
   {
+    id: '5',
+    title: 'Painting Work',
+    project_type: 'Painting',
+    description: 'Large-scale residential and commercial painting project, delivering flawless finishes across all interior and exterior surfaces.',
+    image_url: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=800&auto=format&fit=crop',
+    location: 'Abu Hail, Dubai',
+    completion_date: '2023-06-01',
+  },
+  {
     id: '6',
-    title: 'Government Building Maintenance',
-    project_type: 'Government',
-    description: 'Comprehensive maintenance contract including cleaning, tiling repairs, painting, and MEP servicing for a public-sector facility.',
-    image_url: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=800&auto=format&fit=crop',
-    location: 'Deira, Dubai',
+    title: 'Wooden Maintenance',
+    project_type: 'Carpentry',
+    description: 'Carpentry and wooden maintenance works including door polishing, cabinet installation, and pergola construction.',
+    image_url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop',
+    location: 'Dubai, UAE',
     completion_date: '2023-12-01',
   },
 ];
 
 const typeBadgeColors: Record<string, string> = {
-  Commercial: 'bg-blue-600/90',
-  Residential: 'bg-emerald-600/90',
-  Retail: 'bg-purple-600/90',
-  Hospitality: 'bg-amber-600/90',
-  Industrial: 'bg-orange-600/90',
-  Government: 'bg-red-600/90',
+  'Gypsum Work': 'bg-purple-600/90',
+  'Waterproofing': 'bg-blue-600/90',
+  'Tile Installation': 'bg-emerald-600/90',
+  'Painting': 'bg-orange-600/90',
+  'Carpentry': 'bg-amber-600/90',
 };
 
 const ProjectGallery = () => {
@@ -87,11 +87,11 @@ const ProjectGallery = () => {
               <span className="label-text text-red-400">Portfolio</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-white heading-tight">
-              Our Latest Projects
+              Our Projects
             </h2>
           </div>
           <p className="text-white/40 max-w-sm leading-relaxed text-sm md:text-right">
-            A selection of our work across the UAE — from multinational offices to luxury residences.
+            A selection of our completed work across the UAE — from gypsum and tiling to painting and waterproofing.
           </p>
         </div>
 
@@ -109,12 +109,10 @@ const ProjectGallery = () => {
               </div>
             ))
           ) : (
-            displayProjects.map((project, i) => (
+            displayProjects.map((project) => (
               <div
                 key={project.id}
-                className={`group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-white/5 hover:border-red-600/30 transition-all duration-500 hover:-translate-y-1 ${
-                  i === 0 ? 'md:col-span-2 lg:col-span-1' : ''
-                }`}
+                className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-white/5 hover:border-red-600/30 transition-all duration-500 hover:-translate-y-1"
               >
                 {/* Image */}
                 <div className="relative overflow-hidden h-60">
@@ -124,7 +122,6 @@ const ProjectGallery = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent" />
-                  {/* Type badge */}
                   <span className={`absolute top-4 left-4 ${typeBadgeColors[project.project_type] || 'bg-red-600/90'} text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full`}>
                     {project.project_type}
                   </span>
