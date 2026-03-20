@@ -175,11 +175,13 @@ const HeroSection = () => {
           {/* Right — feature cards, desktop only */}
           <div
             className="relative hidden lg:block"
-            style={{ animation: 'fadeRight 1s cubic-bezier(0.22,1,0.36,1) 0.6s both' }}
+            data-aos="fade-left"
+            data-aos-delay="400"
+            data-aos-duration="900"
           >
             <div className="relative space-y-4 pl-8">
               {/* Main image */}
-              <div className="relative overflow-hidden rounded-2xl shadow-dark-xl border border-white/8">
+              <div className="relative overflow-hidden rounded-2xl shadow-dark-xl border border-white/8" data-aos="zoom-in" data-aos-delay="500">
                 <img
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop"
                   alt="Professional fit-out work by Base2Roof"
@@ -194,7 +196,7 @@ const HeroSection = () => {
 
               {/* Stat cards */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="glass-dark rounded-2xl p-5 border border-white/8 float-animation">
+                <div className="glass-dark rounded-2xl p-5 border border-white/8 float-animation" data-aos="fade-up" data-aos-delay="600">
                   <div className="w-9 h-9 bg-red-600/20 rounded-lg flex items-center justify-center mb-3">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
@@ -203,7 +205,7 @@ const HeroSection = () => {
                   <p className="text-white text-xs font-semibold mb-0.5">Dubai Municipality</p>
                   <p className="text-white/40 text-[11px]">Licensed Contractor</p>
                 </div>
-                <div className="glass-dark rounded-2xl p-5 border border-white/8 float-animation-slow">
+                <div className="glass-dark rounded-2xl p-5 border border-white/8 float-animation-slow" data-aos="fade-up" data-aos-delay="700">
                   <div className="w-9 h-9 bg-red-600/20 rounded-lg flex items-center justify-center mb-3">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2">
                       <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
@@ -215,7 +217,7 @@ const HeroSection = () => {
               </div>
 
               {/* Address card */}
-              <div className="glass-dark rounded-2xl px-5 py-4 border border-red-600/20 flex items-center gap-4">
+              <div className="glass-dark rounded-2xl px-5 py-4 border border-red-600/20 flex items-center gap-4" data-aos="fade-up" data-aos-delay="800">
                 <div className="w-10 h-10 bg-red-gradient rounded-xl flex items-center justify-center flex-shrink-0">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />

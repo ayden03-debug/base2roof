@@ -4,6 +4,7 @@ import HeroSection from '../components/HeroSection';
 import ProjectGallery from '../components/ProjectGallery';
 import AboutSection from '../components/AboutSection';
 import QuoteForm from '../components/QuoteForm';
+import FloatingTooltip from '../components/FloatingTooltip';
 import { useServices } from '@/hooks/useServices';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -77,7 +78,13 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = ['Home', 'Services', 'Projects', 'About', 'Contact'];
+  const navLinks = [
+    { label: 'Home', tip: 'Back to top' },
+    { label: 'Services', tip: 'Painting, Cleaning, Tiling & more' },
+    { label: 'Projects', tip: 'View completed projects across Dubai' },
+    { label: 'About', tip: 'Our story since 2013' },
+    { label: 'Contact', tip: 'Get a free quote today' },
+  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -115,14 +122,15 @@ const Index = () => {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center space-x-1">
               {navLinks.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="relative px-4 py-2.5 text-sm font-medium text-white/65 hover:text-white transition-colors duration-300 group min-h-[44px] flex items-center"
-                >
-                  {item}
-                  <span className="absolute inset-x-4 bottom-1 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                </a>
+                <FloatingTooltip key={item.label} content={<span className="text-white/80 text-xs">{item.tip}</span>} placement="bottom" delay={400}>
+                  <a
+                    href={`#${item.label.toLowerCase()}`}
+                    className="relative px-4 py-2.5 text-sm font-medium text-white/65 hover:text-white transition-colors duration-300 group min-h-[44px] flex items-center"
+                  >
+                    {item.label}
+                    <span className="absolute inset-x-4 bottom-1 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  </a>
+                </FloatingTooltip>
               ))}
             </nav>
 
@@ -147,12 +155,12 @@ const Index = () => {
             <div className="lg:hidden border-t border-white/10 py-3 space-y-0.5 bg-brand-dark/98">
               {navLinks.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.label}
+                  href={`#${item.label.toLowerCase()}`}
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center px-4 min-h-[48px] text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
             </div>
@@ -168,7 +176,7 @@ const Index = () => {
         <section id="services" className="py-16 md:py-28 bg-white">
           <div className="container mx-auto px-4 sm:px-6">
 
-            <div className="max-w-2xl mb-12 md:mb-20 reveal-left">
+            <div className="max-w-2xl mb-12 md:mb-20" data-aos="fade-right">
               <div className="flex items-center gap-3 mb-4 sm:mb-5">
                 <div className="red-divider-anim" />
                 <span className="label-text text-red-600">What We Do</span>
@@ -209,13 +217,37 @@ const Index = () => {
                 ))
               ) : (
                 FALLBACK_SERVICES.map((service, i) => (
-                  <div key={service.id} className={`reveal stagger-${(i % 8) + 1} group p-7 border border-gray-100 rounded-2xl hover:border-red-100 card-hover-red bg-white relative overflow-hidden`}>
+                  <div key={service.id} data-aos="zoom-in-up" data-aos-delay={(i % 4) * 80} className={`group p-7 border border-gray-100 rounded-2xl hover:border-red-100 card-hover-red bg-white relative overflow-hidden`}>
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500 opacity-0 group-hover:opacity-100" />
                     <div className="relative">
-                      <div className="w-13 h-13 w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                          <path d={service.iconPath} />
-                        </svg>
+                      <div className="flex items-start justify-between mb-5">
+                        <div className="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <path d={service.iconPath} />
+                          </svg>
+                        </div>
+                        <FloatingTooltip
+                          placement="top"
+                          content={
+                            <div className="space-y-1.5 min-w-[180px]">
+                              <p className="font-semibold text-white text-xs mb-2">{service.title}</p>
+                              {service.bullets.map((b) => (
+                                <div key={b} className="flex items-start gap-1.5 text-white/70 text-xs">
+                                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" className="mt-0.5 flex-shrink-0">
+                                    <polyline points="9 18 15 12 9 6" />
+                                  </svg>
+                                  {b}
+                                </div>
+                              ))}
+                            </div>
+                          }
+                        >
+                          <button className="w-7 h-7 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-400 flex items-center justify-center transition-colors duration-200 flex-shrink-0">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                          </button>
+                        </FloatingTooltip>
                       </div>
                       <h3 className="text-base font-bold text-gray-900 mb-2">{service.title}</h3>
                       <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.description}</p>
@@ -262,11 +294,11 @@ const Index = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-12">
                 {[
-                  { label: 'Email', value: 'info@base2roof.ae', href: 'mailto:info@base2roof.ae', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
-                  { label: 'Phone', value: '+971 556951608', href: 'tel:+971556951608', icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' },
-                  { label: 'Address', value: '308, Al Shali Building, Abu Hail, Dubai', href: '#', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
+                  { label: 'Email', value: 'info@base2roof.ae', href: 'mailto:info@base2roof.ae', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', delay: 0 },
+                  { label: 'Phone', value: '+971 556951608', href: 'tel:+971556951608', icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z', delay: 100 },
+                  { label: 'Address', value: '308, Al Shali Building, Abu Hail, Dubai', href: '#', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', delay: 200 },
                 ].map((item) => (
-                  <a key={item.label} href={item.href} className="glass-dark rounded-2xl p-5 sm:p-6 text-left hover:border-red-600/30 border border-transparent transition-colors duration-300 flex sm:block items-center gap-4 sm:gap-0 min-h-[64px] sm:min-h-0">
+                  <a key={item.label} href={item.href} data-aos="fade-up" data-aos-delay={item.delay} className="glass-dark rounded-2xl p-5 sm:p-6 text-left hover:border-red-600/30 border border-transparent transition-colors duration-300 flex sm:block items-center gap-4 sm:gap-0 min-h-[64px] sm:min-h-0">
                     <div className="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0 sm:mb-4">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d={item.icon} />
