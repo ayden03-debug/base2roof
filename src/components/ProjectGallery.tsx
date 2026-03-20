@@ -106,7 +106,9 @@ const ProjectGallery = () => {
             displayProjects.map((project, i) => (
               <div
                 key={project.id}
-                className={`reveal stagger-${(i % 8) + 1} group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-white/5 hover:border-red-600/30 transition-all duration-500`}
+                data-aos={i % 2 === 0 ? 'fade-right' : 'fade-left'}
+                data-aos-delay={(i % 4) * 100}
+                className={`group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-white/5 hover:border-red-600/30 transition-all duration-500`}
               >
                 {/* Image */}
                 <div className="relative overflow-hidden h-52 sm:h-64 md:h-72">

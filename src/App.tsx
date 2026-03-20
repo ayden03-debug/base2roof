@@ -4,12 +4,26 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 // Global scroll-reveal observer — watches all .reveal* elements and adds .visible
+const useInitAOS = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      once: true,
+      offset: 60,
+      delay: 0,
+    });
+  }, []);
+};
+
 const useGlobalReveal = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,6 +57,7 @@ const useGlobalReveal = () => {
 };
 
 const AppContent = () => {
+  useInitAOS();
   useGlobalReveal();
   return (
     <BrowserRouter>
